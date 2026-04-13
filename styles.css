@@ -281,8 +281,8 @@ html, body {
     height: 188px;
   }
 
-  /* Push legend down to sit below the logo */
+  /* Push legend down to sit directly below the logo */
   #legend {
-    top: 90px;
+    top: 84px;
   }
 }
