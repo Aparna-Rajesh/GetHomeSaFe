@@ -186,6 +186,7 @@ html, body {
   height: 90px;
   width: 280px;
   overflow: hidden;
+  clip-path: inset(0);   /* ensures clipping works on fixed elements */
   pointer-events: none;
   z-index: 999;
 }
@@ -274,6 +275,7 @@ html, body {
     right: 12px;
     width: 220px;
     height: 70px;
+    clip-path: inset(0);
   }
 
   #logo {
@@ -281,8 +283,8 @@ html, body {
     height: 188px;
   }
 
-  /* Push legend down to sit directly below the logo */
+  /* Sits flush below the logo-wrap (top 12 + height 70 + 4px gap) */
   #legend {
-    top: 84px;
+    top: 65px;
   }
 }
