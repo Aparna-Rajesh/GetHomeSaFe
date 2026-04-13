@@ -1,0 +1,16 @@
+[
+  {
+    "street": "Turk St",
+    "from": "Jones St",
+    "to": "Leavenworth St",
+    "hours": [20, 21, 22, 23, 0, 1, 2],
+    "note": "Very active at night, avoid after 8pm"
+  },
+  {
+    "street": "6th St",
+    "from": "Market St",
+    "to": "Howard St",
+    "hours": [18, 19, 20, 21, 22, 23],
+    "note": "Drug activity in evenings"
+  }
+]
