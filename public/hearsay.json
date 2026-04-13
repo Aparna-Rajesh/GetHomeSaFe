@@ -1,16 +1,16 @@
 [
   {
-    "street": "Turk St",
-    "from": "Jones St",
-    "to": "Leavenworth St",
-    "hours": [20, 21, 22, 23, 0, 1, 2],
-    "note": "Very active at night, avoid after 8pm"
-  },
-  {
-    "street": "6th St",
+    "street": "6th Street",
     "from": "Market St",
     "to": "Howard St",
-    "hours": [18, 19, 20, 21, 22, 23],
-    "note": "Drug activity in evenings"
+    "hours": [23, 0, 1, 2],
+    "note": "Avoid around midnight — via @mmaaz_98 on X"
+  },
+  {
+    "street": "Market Street",
+    "from": "5th St",
+    "to": "7th St",
+    "hours": [23, 0, 1, 2],
+    "note": "Avoid around midnight near 6th — via @mmaaz_98 on X"
   }
 ]

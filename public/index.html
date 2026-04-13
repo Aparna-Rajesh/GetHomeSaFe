@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>GetHomeSaFe</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="map"></div>
+
+  <div id="legend" class="hidden">
+    <div class="legend-row"><span class="swatch" style="background:#cc0000;opacity:1"></span> Avoid — high activity</div>
+    <div class="legend-row"><span class="swatch" style="background:#ff4400;opacity:0.8"></span> Elevated — consider detour</div>
+    <div class="legend-row"><span class="swatch" style="background:#ffaa00;opacity:0.55"></span> Some activity — stay aware</div>
+    <div class="legend-row"><span class="swatch" style="background:#ffe033;opacity:0.25"></span> Low — probably fine</div>
+  </div>
+
+  <div id="controls">
+    <div id="controls-header">
+      <span id="app-title">GetHomeSaFe</span>
+      <span id="current-time-display"></span>
+    </div>
+
+    <div id="layers">
+      <div class="layer-row">
+        <label class="toggle">
+          <input type="checkbox" id="toggle-crime" checked> Crime data
+        </label>
+        <button id="crime-expand-btn" class="expand-btn" aria-label="Expand years">▾</button>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-hearsay" checked> Hearsay
+        </label>
+      </div>
+
+      <div id="year-checkboxes" class="sub-checkboxes hidden">
+        <label class="sub-toggle"><input type="checkbox" class="year-cb" value="2024" checked> 2024</label>
+        <label class="sub-toggle"><input type="checkbox" class="year-cb" value="2023" checked> 2023</label>
+        <label class="sub-toggle"><input type="checkbox" class="year-cb" value="2022" checked> 2022</label>
+      </div>
+    </div>
+
+    <div id="time-control">
+      <div id="time-labels">
+        <span>12am</span>
+        <span>6am</span>
+        <span>12pm</span>
+        <span>6pm</span>
+        <span>11pm</span>
+      </div>
+      <input type="range" id="time-slider" min="0" max="23" step="1">
+      <div id="time-row">
+        <span id="selected-hour-label">12:00 am</span>
+        <button id="now-btn">Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

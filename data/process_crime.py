@@ -29,10 +29,10 @@ import requests
 
 # Bounding box covering downtown SF: Tenderloin, SoMa, Mission, Civic Center
 DOWNTOWN_BBOX = {
-    "north": 37.7955,
-    "south": 37.7690,
+    "north": 37.8120,  # Fisherman's Wharf
+    "south": 37.7530,  # Mission
     "east":  -122.3900,
-    "west":  -122.4250,
+    "west":  -122.4450,  # Pacific Heights
 }
 
 # SF Open Data — SFPD Incident Reports (2018–present)
