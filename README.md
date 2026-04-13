@@ -1,6 +1,6 @@
 # GetHomeSaFe
 
-I've been considering moving to San Francisco for some time now, and while discussing different its different neighborhoods and contrasting the areas with Manhattan, folks familiar with SF have all responded with some version of the same thing: *"oh, just avoid [street] after [time]."*
+I've been considering moving to San Francisco for some time now, and while comparing its neighborhoods with those of Manhattan, folks familiar with SF have all responded with some version of the same thing: *"oh, just avoid [street] after [time]."*
 
 Which is great advice! But after a handful of these conversations, I found myself attempting to maintain a mental list of street names, hours, and vague disclaimers that I could no longer keep straight.
 
@@ -29,7 +29,7 @@ pip install osmnx geopandas pandas shapely requests
 python data/process_crime.py --year 2024
 
 # Serve the app
-cd public && python3 -m http.server 8765
+python3 -m http.server 8765
 # Open http://localhost:8765
 ```
 

@@ -29,10 +29,10 @@ import requests
 
 # Bounding box covering downtown SF: Tenderloin, SoMa, Mission, Civic Center
 DOWNTOWN_BBOX = {
-    "north": 37.8120,  # Fisherman's Wharf
-    "south": 37.7530,  # Mission
-    "east":  -122.3900,
-    "west":  -122.4450,  # Pacific Heights
+    "north": 37.8320,  # Marina / northern Presidio
+    "south": 37.7490,  # Dogpatch
+    "east":  -122.3820,  # Dogpatch waterfront
+    "west":  -122.5100,  # Lincoln Park
 }
 
 # SF Open Data — SFPD Incident Reports (2018–present)
@@ -233,7 +233,7 @@ def main():
     args = parser.parse_args()
 
     raw_dir = os.path.join(os.path.dirname(__file__), "raw")
-    output_dir = os.path.join(os.path.dirname(__file__), "..", "public")
+    output_dir = os.path.join(os.path.dirname(__file__), "..")
     os.makedirs(raw_dir, exist_ok=True)
     os.makedirs(output_dir, exist_ok=True)
 
