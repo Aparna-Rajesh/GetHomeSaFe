@@ -33,7 +33,7 @@ html, body {
 
 #controls-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 12px;
 }
@@ -264,4 +264,25 @@ html, body {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* ── Mobile: move logo above the legend (top-right) ── */
+@media (max-width: 768px) {
+  #logo-wrap {
+    top: 12px;
+    left: auto;
+    right: 12px;
+    width: 220px;
+    height: 70px;
+  }
+
+  #logo {
+    top: -64px;
+    height: 188px;
+  }
+
+  /* Push legend down to sit below the logo */
+  #legend {
+    top: 90px;
+  }
 }

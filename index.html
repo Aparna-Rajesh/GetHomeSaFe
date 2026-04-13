@@ -20,7 +20,6 @@
 
   <div id="controls">
     <div id="controls-header">
-      <span id="app-title">GetHomeSaFe</span>
       <span id="current-time-display"></span>
     </div>
 
@@ -30,15 +29,18 @@
           <input type="checkbox" id="toggle-crime" checked> Crime data
         </label>
         <button id="crime-expand-btn" class="expand-btn" aria-label="Expand years">▾</button>
-        <label class="toggle">
-          <input type="checkbox" id="toggle-hearsay" checked> Hearsay
-        </label>
       </div>
 
       <div id="year-checkboxes" class="sub-checkboxes hidden">
         <label class="sub-toggle"><input type="checkbox" class="year-cb" value="2024" checked> 2024</label>
         <label class="sub-toggle"><input type="checkbox" class="year-cb" value="2023"> 2023</label>
         <label class="sub-toggle"><input type="checkbox" class="year-cb" value="2022"> 2022</label>
+      </div>
+
+      <div class="layer-row">
+        <label class="toggle">
+          <input type="checkbox" id="toggle-hearsay" checked> Hearsay
+        </label>
       </div>
     </div>
 
