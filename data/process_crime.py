@@ -16,16 +16,12 @@ Requirements:
 """
 
 import argparse
-import json
-import math
 import os
 
 import geopandas as gpd
 import osmnx as ox
 import pandas as pd
 import requests
-from shapely.geometry import Point
-from tqdm import tqdm
 
 # ---------------------------------------------------------------------------
 # Config
@@ -83,11 +79,13 @@ def download_crime_data(year: int, raw_dir: str) -> pd.DataFrame:
             "$limit": PAGE_SIZE,
             "$offset": offset,
             "$where": (
-                f"incident_year={year} AND "
-                f"latitude > {DOWNTOWN_BBOX['south']} AND "
-                f"latitude < {DOWNTOWN_BBOX['north']} AND "
-                f"longitude > {DOWNTOWN_BBOX['west']} AND "
-                f"longitude < {DOWNTOWN_BBOX['east']}"
+                f"incident_year='{year}' AND "
+                f"latitude IS NOT NULL AND "
+                f"longitude IS NOT NULL AND "
+                f"latitude > '{DOWNTOWN_BBOX['south']}' AND "
+                f"latitude < '{DOWNTOWN_BBOX['north']}' AND "
+                f"longitude > '{DOWNTOWN_BBOX['west']}' AND "
+                f"longitude < '{DOWNTOWN_BBOX['east']}'"
             ),
             "$select": "incident_category,incident_date,incident_time,latitude,longitude",
         }
@@ -143,12 +141,12 @@ def clean(df: pd.DataFrame) -> gpd.GeoDataFrame:
 def get_street_network() -> gpd.GeoDataFrame:
     print("  Fetching street network from OpenStreetMap ...")
     bbox = (
-        DOWNTOWN_BBOX["north"],
+        DOWNTOWN_BBOX["west"],
         DOWNTOWN_BBOX["south"],
         DOWNTOWN_BBOX["east"],
-        DOWNTOWN_BBOX["west"],
+        DOWNTOWN_BBOX["north"],
     )
-    G = ox.graph_from_bbox(*bbox, network_type="walk")
+    G = ox.graph_from_bbox(bbox, network_type="walk")
     edges = ox.graph_to_gdfs(G, nodes=False, edges=True)
     edges = edges.reset_index()
     edges = edges.to_crs("EPSG:3857")  # project to metres for snapping
@@ -163,22 +161,18 @@ def get_street_network() -> gpd.GeoDataFrame:
 def snap_to_streets(incidents: gpd.GeoDataFrame, streets: gpd.GeoDataFrame) -> pd.DataFrame:
     print("  Snapping incidents to nearest street segment ...")
     incidents_proj = incidents.to_crs("EPSG:3857")
+    streets_proj = streets.to_crs("EPSG:3857")
 
-    # Build a spatial index for fast nearest-neighbour lookup
-    streets_sindex = streets.sindex
+    # nearest() returns (input_indices, result_indices) — both 1D arrays
+    # input_indices[i] → which incident; result_indices[i] → which street segment
+    input_indices, nearest_indices = streets_proj.sindex.nearest(incidents_proj.geometry, return_all=False)
 
-    results = []
-    for idx, row in tqdm(incidents_proj.iterrows(), total=len(incidents_proj)):
-        point = row.geometry
-        # Candidate segments within 100 m
-        candidates = list(streets_sindex.nearest(point, 5))
-        best = min(candidates, key=lambda i: streets.iloc[i].geometry.distance(point))
-        results.append({
-            "segment_idx": best,
-            "hour": row["hour"],
-        })
+    results = pd.DataFrame({
+        "segment_idx": nearest_indices,
+        "hour": incidents_proj["hour"].iloc[input_indices].values,
+    })
 
-    return pd.DataFrame(results)
+    return results
 
 
 # ---------------------------------------------------------------------------
